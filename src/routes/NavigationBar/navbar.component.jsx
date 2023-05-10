@@ -1,6 +1,5 @@
 import { Link, Outlet } from 'react-router-dom';
 import './navbar.styles.scss';
-import { Fragment } from 'react';
 
 import { ReactComponent as CrownLogo } from '../../assets/crown.svg';
 
@@ -32,7 +31,7 @@ const Navbar = () => {
                 </Link>
               </div>
               <div className="link-items">
-                <Link to="/signIn" className="navigation-link">
+                <Link to="/auth" className="navigation-link">
                   Sign In
                 </Link>
               </div>

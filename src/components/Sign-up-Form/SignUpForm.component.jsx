@@ -1,0 +1,115 @@
+import { useState } from 'react';
+import {
+  createUserDocumentFromAuth,
+  createUserDocumentFromEmail,
+} from '../../utils/firebase.utils';
+import FormInput from '../Form-input/FormInput.component';
+
+import './SignUpForm.styles.scss';
+import Button from '../button/button.component';
+
+const defaultFormFields = {
+  displayName: '',
+  email: '',
+  password: '',
+  confirmPassword: '',
+};
+
+const handleChange = (setter, values) => {
+  return (event) => {
+    const { name, value } = event.target;
+    setter({ ...values, [name]: value });
+  };
+};
+
+const handleSubmit = (formFields) => {
+  const { displayName, email, password, confirmPassword } = formFields;
+
+  return async (event) => {
+    event.preventDefault();
+    if (!email || !password) {
+      alert('Email and Password cannot be empty');
+      return;
+    } else if (password !== confirmPassword) {
+      alert('Password and Confirm Password does not match');
+      return;
+    }
+
+    try {
+      const { user } = await createUserDocumentFromEmail(email, password);
+      await createUserDocumentFromAuth(user, { displayName });
+    } catch (err) {
+      document.firebaseError = err;
+      switch (err.code) {
+        case 'auth/email-already-in-use':
+          alert('Email Already in use');
+          break;
+        case 'auth/weak-password':
+          alert('Weak Password. Password must be 6 characters or more');
+          break;
+        default:
+          console.error(err);
+      }
+    }
+  };
+};
+
+const SignUpForm = () => {
+  const [formFields, setFormFields] = useState(defaultFormFields);
+  const { displayName, email, password, confirmPassword } = formFields;
+
+  return (
+    <div className="sign-up-container">
+      <h2>Don't have an account?</h2>
+      <span>Sign Up with your email and password</span>
+      <form id="myForm" onSubmit={handleSubmit(formFields)}>
+        <FormInput
+          label="Display Name"
+          inputOptions={{
+            type: 'text',
+            name: 'displayName',
+            onChange: handleChange(setFormFields, formFields),
+            required: true,
+            value: displayName,
+          }}
+        />
+
+        <FormInput
+          label="Email"
+          inputOptions={{
+            type: 'email',
+            name: 'email',
+            onChange: handleChange(setFormFields, formFields),
+            required: true,
+            value: email,
+          }}
+        />
+
+        <FormInput
+          label="Password"
+          inputOptions={{
+            type: 'password',
+            name: 'password',
+            onChange: handleChange(setFormFields, formFields),
+            required: true,
+            value: password,
+          }}
+        />
+        <FormInput
+          label="Confirm Password"
+          inputOptions={{
+            type: 'password',
+            name: 'confirmPassword',
+            onChange: handleChange(setFormFields, formFields),
+            required: true,
+            value: confirmPassword,
+          }}
+        />
+
+        <Button children="Sign Up" type="submit" />
+      </form>
+    </div>
+  );
+};
+
+export default SignUpForm;
