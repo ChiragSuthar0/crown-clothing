@@ -5,10 +5,13 @@ import { ReactComponent as CrownLogo } from '../../assets/crown.svg';
 import { Fragment, useContext } from 'react';
 import { UserContext } from '../../contexts/User.context';
 import { signOutUser } from '../../utils/firebase.utils';
+import CartIcon from '../../components/Cart-Icon/cart-icon.component';
+import CartDropdown from '../../components/Cart-dropdown/cart-dropdown.component';
+import { CartContext } from '../../contexts/Cart.context';
 
 const Navbar = () => {
   const { currentUser } = useContext(UserContext);
-  console.log(currentUser);
+  const { isCartOpen } = useContext(CartContext);
 
   return (
     <Fragment>
@@ -16,24 +19,14 @@ const Navbar = () => {
         <div className="container">
           <div className="navbar">
             <div className="logo-container">
-              <Link to="/home" className="logo">
+              <Link to="/" className="logo">
                 <CrownLogo className="logo-svg" />
               </Link>
             </div>
             <div className="navbar-links">
               <div className="link-items">
-                <Link className="navigation-link" to="/">
-                  Home
-                </Link>
-              </div>
-              <div className="link-items">
                 <Link to="/shop" className="navigation-link">
                   Shop
-                </Link>
-              </div>
-              <div className="link-items">
-                <Link to="/help" className="navigation-link">
-                  Help
                 </Link>
               </div>
               <div className="link-items">
@@ -47,7 +40,11 @@ const Navbar = () => {
                   </Link>
                 )}
               </div>
+              <div className="link-items">
+                <CartIcon />
+              </div>
             </div>
+            {isCartOpen && <CartDropdown />}
           </div>
         </div>
       </header>
