@@ -20,6 +20,10 @@ header {
       display: flex;
       align-items: center;
       gap: 30px;
+
+      .link-items {
+        cursor: pointer;
+      }
     }
   }
 

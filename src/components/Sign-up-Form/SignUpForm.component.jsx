@@ -22,9 +22,8 @@ const handleChange = (setter, values) => {
   };
 };
 
-const handleSubmit = (formFields) => {
+const handleSubmit = (formFields, setFormFields) => {
   const { displayName, email, password, confirmPassword } = formFields;
-
   return async (event) => {
     event.preventDefault();
     if (!email || !password) {
@@ -38,6 +37,7 @@ const handleSubmit = (formFields) => {
     try {
       const { user } = await createUserDocumentFromEmail(email, password);
       await createUserDocumentFromAuth(user, { displayName });
+      setFormFields(defaultFormFields);
     } catch (err) {
       document.firebaseError = err;
       switch (err.code) {
@@ -48,7 +48,7 @@ const handleSubmit = (formFields) => {
           alert('Weak Password. Password must be 6 characters or more');
           break;
         default:
-          console.error(err);
+          if (process.env.NODE_ENV === 'development') console.error(err);
       }
     }
   };
@@ -62,7 +62,7 @@ const SignUpForm = () => {
     <div className="sign-up-container">
       <h2>Don't have an account?</h2>
       <span>Sign Up with your email and password</span>
-      <form id="myForm" onSubmit={handleSubmit(formFields)}>
+      <form id="myForm" onSubmit={handleSubmit(formFields, setFormFields)}>
         <FormInput
           label="Display Name"
           inputOptions={{

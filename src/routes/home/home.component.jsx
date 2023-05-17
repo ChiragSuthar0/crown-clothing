@@ -29,6 +29,7 @@ const categories = [
 ];
 
 const Home = () => {
+  console.log(process.env.NODE_ENV);
   return (
     <section>
       <div className="container">

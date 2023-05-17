@@ -33,8 +33,7 @@ const SignInForm = () => {
     }
 
     try {
-      const signedInUser = await signInWithEmail(email, password);
-      console.log(signedInUser);
+      await signInWithEmail(email, password);
       setFormFields(defaultFormFields);
     } catch (error) {
       switch (error.code) {
@@ -44,8 +43,11 @@ const SignInForm = () => {
         case 'auth/too-many-requests':
           alert('Please Try Again after some time!');
           break;
+        case 'auth/user-not-found':
+          alert('No User associated with this email');
+          break;
         default:
-          console.error(error);
+          if (process.env.NODE_ENV === 'development') console.error(error);
       }
     }
   };
@@ -78,6 +80,7 @@ const SignInForm = () => {
         <div className="buttons-container">
           <Button children="Sign In" type="submit" />
           <Button
+            type="button"
             buttonType="google"
             children="Google Sign In"
             onClick={signInWithGoogleRedirect}
