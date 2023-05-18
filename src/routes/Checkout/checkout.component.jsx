@@ -29,6 +29,15 @@ const Checkout = () => {
               />
             ))}
           </div>
+          {cartItems.length !== 0 && (
+            <div className="total">
+              Total: ＄
+              {cartItems.reduce(
+                (total, item) => total + item.quantity * item.price,
+                0
+              )}
+            </div>
+          )}
         </div>
       </div>
     </section>

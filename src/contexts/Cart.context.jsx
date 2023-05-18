@@ -34,7 +34,6 @@ const decreaseItem = (cartItems, ProductToDecrease) => {
 
 export const CartProvider = ({ children }) => {
   const [isCartOpen, setIsCartOpen] = useState(false);
-
   const [cartItems, setCartItems] = useState([]);
 
   const addCartItems = (ProductToAdd) => {

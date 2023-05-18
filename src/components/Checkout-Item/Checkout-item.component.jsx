@@ -28,7 +28,7 @@ const CheckoutItem = ({
       <div className="price">${price}</div>
       <div className="remove">
         <button onClick={removeItem} className="remove-item-button">
-          🞪
+          &#10005;
         </button>
       </div>
     </div>
