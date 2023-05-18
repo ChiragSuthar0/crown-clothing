@@ -3,18 +3,28 @@ import Button from '../button/button.component';
 import './cart-dropdown.styles.scss';
 import { useContext } from 'react';
 import { CartContext } from '../../contexts/Cart.context';
+import CartItem from '../Cart-Item/cart-item.component';
+import { Link } from 'react-router-dom';
 
 const CartDropdown = () => {
-  const { cartItemCount } = useContext(CartContext);
+  const { cartItems, setIsCartOpen } = useContext(CartContext);
+  const closeCartDropdown = () => setIsCartOpen(false);
 
   return (
     <div className="cart-dropdown-container">
       <div className="cart-items">
-        {cartItemCount === 0 && (
+        {cartItems.length === 0 && (
           <span className="empty-message">Cart is Empty</span>
         )}
+        {cartItems.map((T) => (
+          <CartItem CartItem={T} key={T.id} />
+        ))}
       </div>
-      <Button>Go To Checkout</Button>
+      <Link to="/checkout">
+        <Button onClick={closeCartDropdown} style={{ width: '100%' }}>
+          Go To Checkout
+        </Button>
+      </Link>
     </div>
   );
 };

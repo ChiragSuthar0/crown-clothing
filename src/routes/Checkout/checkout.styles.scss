@@ -1,0 +1,30 @@
+.checkout-container {
+  max-width: 940px;
+  margin: 0 auto;
+}
+
+.checkout-page-columns {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  text-align: center;
+  border-bottom: 1px solid darkgrey;
+  padding: 10px 0;
+
+  span {
+    flex: 0 0 20%;
+    text-transform: uppercase;
+
+    &:first-child {
+      text-align: start;
+    }
+
+    &:last-child {
+      text-align: end;
+      padding-right: 7%;
+    }
+
+  }
+}
+
+

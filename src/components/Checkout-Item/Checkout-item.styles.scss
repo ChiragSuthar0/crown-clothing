@@ -1,0 +1,33 @@
+.checkout-items-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  text-align: center;
+  align-items: center;
+  padding: 10px 0;
+  border-bottom: 1px solid darkgrey;
+
+  div {
+    flex: 0 0 20%;
+
+    &.quantity {
+      span {
+        padding: 5px 10px;
+      }
+    }
+
+    button {
+      border: none;
+      background: none;
+      font-weight: bolder;
+      font-size: 22px;
+    }
+
+  }
+
+  img {
+    flex: 0 0 20%;
+    object-fit: cover;
+    max-width: 20%;
+  }
+}
