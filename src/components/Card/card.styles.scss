@@ -1,12 +1,13 @@
 .category-card {
-  min-width: 30%;
   height: 240px;
+  width: 30%;
   flex: 1 1 auto;
   display: flex;
   align-items: center;
   justify-content: center;
   border: 1px solid black;
   overflow: hidden;
+  transition: 2s;
 
   &:hover {
     cursor: pointer;
@@ -55,5 +56,27 @@
       font-weight: lighter;
       font-size: 16px;
     }
+  }
+
+
+}
+
+.category-card-notLoaded {
+  flex: 0 0 0;
+  height: 0;
+  border: none;
+  position: relative;
+}
+
+
+@media (max-width: 768px) {
+.category-card {
+  width: 48%;
+}
+}
+
+@media (max-width: 484px) {
+  .category-card {
+    width: 100%;
   }
 }

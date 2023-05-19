@@ -2,7 +2,7 @@ import './card.styles.scss';
 
 const Card = ({ categoryName, categoryImg }) => {
   return (
-    <div className="category-card">
+    <div className="category-card category-card-notLoaded">
       <div
         className="background-image"
         style={{

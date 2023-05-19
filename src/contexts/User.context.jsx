@@ -18,7 +18,6 @@ export const UserProvider = ({ children }) => {
       if (user) {
         createUserDocumentFromAuth(user).then();
       }
-      console.log(user);
       setCurrentUser(user);
     });
   }, []);

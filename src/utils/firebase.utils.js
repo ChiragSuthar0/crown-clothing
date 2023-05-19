@@ -3,17 +3,26 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from 'firebase/app';
 import {
+  createUserWithEmailAndPassword,
   getAuth,
+  GoogleAuthProvider,
+  onAuthStateChanged,
+  signInWithEmailAndPassword,
   signInWithPopup,
   signInWithRedirect,
-  createUserWithEmailAndPassword,
-  GoogleAuthProvider,
-  signInWithEmailAndPassword,
   signOut,
-  onAuthStateChanged,
 } from 'firebase/auth';
 
-import { getFirestore, doc, getDoc, setDoc } from 'firebase/firestore';
+import {
+  collection,
+  doc,
+  getDoc,
+  getDocs,
+  getFirestore,
+  query,
+  setDoc,
+  writeBatch,
+} from 'firebase/firestore';
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -82,3 +91,31 @@ export const signOutUser = () => signOut(auth);
 
 export const onAuthStateChangeListener = (callback) =>
   onAuthStateChanged(auth, callback);
+
+export const addCollectionAndDocuments = async (
+  collectionKey,
+  objectsToAdd = []
+) => {
+  const collectionRef = collection(db, collectionKey);
+  const batch = writeBatch(db);
+
+  objectsToAdd.forEach((obj) => {
+    const docRef = doc(collectionRef, obj.title.toLowerCase());
+    batch.set(docRef, obj);
+  });
+
+  await batch.commit();
+  console.log('done');
+};
+
+export const getAllProductsAndCategories = async () => {
+  const collectionRef = collection(db, 'categories');
+  const q = query(collectionRef);
+
+  const querySnapshot = await getDocs(q);
+  return querySnapshot.docs.reduce((acc, doc) => {
+    const { title, items } = doc.data();
+    acc[title.toLowerCase()] = items;
+    return acc;
+  }, {});
+};
