@@ -1,26 +1,22 @@
 import { useNavigate } from 'react-router-dom';
-import './card.styles.scss';
+import { BackgroundImage, CategoryCard, CategoryInfo } from './card.styles';
 
 const Card = ({ categoryName, categoryImg }) => {
-
   const navigate = useNavigate();
   const redirectToShop = (cat) => {
-    return () => navigate('/shop/' + cat);
+    return () => navigate('/shop/' + cat.toLowerCase());
   };
   return (
-    <div className="category-card category-card-notLoaded" onClick={redirectToShop(categoryName.toLowerCase())}>
-      <div
-        className="background-image"
-        style={{
-          backgroundImage: `url(${categoryImg})`,
-          backgroundSize: 'cover',
-        }}
-      />
-      <div className="category-info">
+    <CategoryCard
+      className="category-card-notLoaded"
+      onClick={redirectToShop(categoryName)}
+    >
+      <BackgroundImage imageUrl={categoryImg} />
+      <CategoryInfo>
         <h2>{categoryName}</h2>
         <p>Shop Now</p>
-      </div>
-    </div>
+      </CategoryInfo>
+    </CategoryCard>
   );
 };
 

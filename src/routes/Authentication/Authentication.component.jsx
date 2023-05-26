@@ -1,18 +1,13 @@
 /* eslint-disable */
 
-import { getRedirectResult } from 'firebase/auth';
-
 import {
-  auth,
   createUserDocumentFromAuth,
   signInWithGooglePopup,
 } from '../../utils/firebase.utils';
-import { useContext, useEffect } from 'react';
 import SignUpForm from '../../components/Sign-up-Form/SignUpForm.component';
 import SignInForm from '../../components/Sign-in-form/SignInForm.component';
 
-import './Authentication.styles.scss';
-import { UserContext } from '../../contexts/User.context';
+import { SignInAndSignUpContainer } from './Authentication.styles';
 
 const Authentication = () => {
   // const { setCurrentUser } = useContext(UserContext);
@@ -38,10 +33,10 @@ const Authentication = () => {
   return (
     <section className="authentication">
       <div className="container">
-        <div className="sign-in-and-sign-up-container">
+        <SignInAndSignUpContainer>
           <SignInForm />
           <SignUpForm />
-        </div>
+        </SignInAndSignUpContainer>
       </div>
     </section>
   );

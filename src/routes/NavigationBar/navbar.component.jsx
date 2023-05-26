@@ -1,5 +1,5 @@
 import { Link, Outlet } from 'react-router-dom';
-import './navbar.styles.scss';
+import './navbar.styles';
 
 import { ReactComponent as CrownLogo } from '../../assets/crown.svg';
 import { Fragment, useContext } from 'react';
@@ -8,6 +8,7 @@ import { signOutUser } from '../../utils/firebase.utils';
 import CartIcon from '../../components/Cart-Icon/cart-icon.component';
 import CartDropdown from '../../components/Cart-dropdown/cart-dropdown.component';
 import { CartContext } from '../../contexts/Cart.context';
+import { Head, LogoContainer, Nav, NavbarLinks } from './navbar.styles';
 
 const Navbar = () => {
   const { currentUser } = useContext(UserContext);
@@ -15,15 +16,15 @@ const Navbar = () => {
 
   return (
     <Fragment>
-      <header>
+      <Head>
         <div className="container">
-          <div className="navbar">
-            <div className="logo-container">
+          <Nav>
+            <LogoContainer>
               <Link to="/" className="logo">
                 <CrownLogo className="logo-svg" />
               </Link>
-            </div>
-            <div className="navbar-links">
+            </LogoContainer>
+            <NavbarLinks>
               <div className="link-items">
                 <Link to="/shop" className="navigation-link">
                   Shop
@@ -43,11 +44,11 @@ const Navbar = () => {
               <div className="link-items">
                 <CartIcon />
               </div>
-            </div>
+            </NavbarLinks>
             {isCartOpen && <CartDropdown />}
-          </div>
+          </Nav>
         </div>
-      </header>
+      </Head>
       <Outlet />
     </Fragment>
   );

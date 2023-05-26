@@ -3,7 +3,8 @@ import { CategoriesContext } from '../../contexts/Categories.context';
 
 import CategoryPreview from '../../components/Category-preview/category-preview.component';
 
-import './Categories-preview.styles.scss';
+import './Categories-preview.styles';
+import { ProductsCategoryContainer } from './Categories-preview.styles';
 
 const CategoriesPreview = () => {
   const { categories } = useContext(CategoriesContext);
@@ -11,7 +12,7 @@ const CategoriesPreview = () => {
   return (
     <section>
       <div className="container">
-        <div className="products-category-container">
+        <ProductsCategoryContainer>
           {Object.keys(categories).map((title) => (
             <CategoryPreview
               key={title}
@@ -19,7 +20,7 @@ const CategoriesPreview = () => {
               products={categories[title]}
             />
           ))}
-        </div>
+        </ProductsCategoryContainer>
       </div>
     </section>
   );
