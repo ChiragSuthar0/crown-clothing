@@ -1,10 +1,10 @@
 import FormInput from '../Form-input/FormInput.component';
 import { useState } from 'react';
-import Button from '../button/button.component';
+import Button, { BUTTON_TYPE_CLASSES } from '../button/button.component';
 import {
   signInWithEmail,
   signInWithGoogleRedirect,
-} from '../../utils/firebase.utils';
+} from '../../utils/firebase/firebase.utils';
 
 import './SignInForm.styles.scss';
 
@@ -81,7 +81,7 @@ const SignInForm = () => {
           <Button type="submit"> Sign In </Button>
           <Button
             type="button"
-            buttonType="google"
+            buttonType={BUTTON_TYPE_CLASSES.google}
             onClick={signInWithGoogleRedirect}
           >
             Google Sign In

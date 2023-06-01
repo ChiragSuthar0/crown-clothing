@@ -3,7 +3,7 @@
 import {
   createUserDocumentFromAuth,
   signInWithGooglePopup,
-} from '../../utils/firebase.utils';
+} from '../../utils/firebase/firebase.utils';
 import SignUpForm from '../../components/Sign-up-Form/SignUpForm.component';
 import SignInForm from '../../components/Sign-in-form/SignInForm.component';
 

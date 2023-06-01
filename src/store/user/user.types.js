@@ -1,0 +1,4 @@
+export const USER_ACTION_TYPES = {
+  UPDATE_USER: 'user/UPDATE_USER',
+  SET_CURRENT_USER: 'user/SET_CURRENT_USER',
+};

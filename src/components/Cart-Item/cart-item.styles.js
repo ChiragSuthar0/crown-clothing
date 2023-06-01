@@ -10,12 +10,13 @@ export const CartItemImage = styled.img`
 export const CartItemInfo = styled.div`
   width: 65%;
   font-size: 16px;
-  flex: 0 0 50%;
+  flex: 0 0 48%;
   display: flex;
   justify-content: center;
 
   &.cart-item-name {
     align-items: flex-end;
+    text-align: center;
   }
 
   &.cart-item-quantity {

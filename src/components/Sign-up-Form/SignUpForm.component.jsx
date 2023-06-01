@@ -2,7 +2,7 @@ import { useState } from 'react';
 import {
   createUserDocumentFromAuth,
   createUserDocumentFromEmail,
-} from '../../utils/firebase.utils';
+} from '../../utils/firebase/firebase.utils';
 import FormInput from '../Form-input/FormInput.component';
 
 import './SignUpForm.styles.scss';
@@ -106,7 +106,7 @@ const SignUpForm = () => {
           }}
         />
 
-        <Button children="Sign Up" type="submit" />
+        <Button type="submit"> Sign Up </Button>
       </form>
     </div>
   );
