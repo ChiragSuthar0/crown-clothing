@@ -4,6 +4,6 @@ export const ProductsContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
   flex-direction: row;
-  justify-content: space-between;
-  gap: 20px;
+  justify-content: flex-start;
+  gap: 26.2px;
 `;
