@@ -7,13 +7,15 @@ import { signOutUser } from '../../utils/firebase/firebase.utils';
 import CartIcon from '../../components/Cart-Icon/cart-icon.component';
 import CartDropdown from '../../components/Cart-dropdown/cart-dropdown.component';
 import { Head, LogoContainer, Nav, NavbarLinks } from './navbar.styles';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { selectCurrentUser } from '../../store/user/user.selector';
 import { selectIsCartOpen } from '../../store/cart/cart.selector';
+import { signOutUserStart } from '../../store/user/user.action';
 
 const Navbar = () => {
   const currentUser = useSelector(selectCurrentUser);
   const isCartOpen = useSelector(selectIsCartOpen);
+  const dispatch = useDispatch();
 
   return (
     <Fragment>
@@ -33,7 +35,10 @@ const Navbar = () => {
               </div>
               <div className="link-items">
                 {currentUser ? (
-                  <span className="navigation-link" onClick={signOutUser}>
+                  <span
+                    className="navigation-link"
+                    onClick={() => dispatch(signOutUserStart())}
+                  >
                     Sign Out
                   </span>
                 ) : (

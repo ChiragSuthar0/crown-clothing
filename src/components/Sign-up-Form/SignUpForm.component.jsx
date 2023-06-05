@@ -7,6 +7,8 @@ import FormInput from '../Form-input/FormInput.component';
 
 import './SignUpForm.styles.scss';
 import Button from '../button/button.component';
+import { signUpStart } from '../../store/user/user.action';
+import { useDispatch } from 'react-redux';
 
 const defaultFormFields = {
   displayName: '',
@@ -22,7 +24,7 @@ const handleChange = (setter, values) => {
   };
 };
 
-const handleSubmit = (formFields, setFormFields) => {
+const handleSubmit = (formFields, setFormFields, dispatch) => {
   const { displayName, email, password, confirmPassword } = formFields;
   return async (event) => {
     event.preventDefault();
@@ -35,8 +37,7 @@ const handleSubmit = (formFields, setFormFields) => {
     }
 
     try {
-      const { user } = await createUserDocumentFromEmail(email, password);
-      await createUserDocumentFromAuth(user, { displayName });
+      dispatch(signUpStart(email, password, displayName));
       setFormFields(defaultFormFields);
     } catch (err) {
       document.firebaseError = err;
@@ -57,12 +58,16 @@ const handleSubmit = (formFields, setFormFields) => {
 const SignUpForm = () => {
   const [formFields, setFormFields] = useState(defaultFormFields);
   const { displayName, email, password, confirmPassword } = formFields;
+  const dispatch = useDispatch();
 
   return (
     <div className="sign-up-container">
       <h2>Don't have an account?</h2>
       <span>Sign Up with your email and password</span>
-      <form id="myForm" onSubmit={handleSubmit(formFields, setFormFields)}>
+      <form
+        id="myForm"
+        onSubmit={handleSubmit(formFields, setFormFields, dispatch)}
+      >
         <FormInput
           label="Display Name"
           inputOptions={{

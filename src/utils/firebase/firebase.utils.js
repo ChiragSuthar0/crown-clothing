@@ -72,9 +72,8 @@ export const createUserDocumentFromAuth = async (
       if (process.env.NODE_ENV === 'development')
         console.error('There was an error creating the user', error.message);
     }
-
-    // return userDocRef;
   }
+  return userSnapshot;
 };
 
 export const createUserDocumentFromEmail = async (email, password) => {
@@ -88,9 +87,6 @@ export const signInWithEmail = async (email, password) => {
 };
 
 export const signOutUser = () => signOut(auth);
-
-export const onAuthStateChangeListener = (callback) =>
-  onAuthStateChanged(auth, callback);
 
 export const addCollectionAndDocuments = async (
   collectionKey,
@@ -114,4 +110,17 @@ export const getAllProductsAndCategories = async () => {
 
   const querySnapshot = await getDocs(q);
   return querySnapshot.docs.map((docSnapshot) => docSnapshot.data());
+};
+
+export const getCurrentUser = () => {
+  return new Promise((resolve, reject) => {
+    const unsubscribe = onAuthStateChanged(
+      auth,
+      (userAuth) => {
+        unsubscribe();
+        resolve(userAuth);
+      },
+      reject
+    );
+  });
 };

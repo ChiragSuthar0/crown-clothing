@@ -1,12 +1,13 @@
 import FormInput from '../Form-input/FormInput.component';
 import { useState } from 'react';
 import Button, { BUTTON_TYPE_CLASSES } from '../button/button.component';
-import {
-  signInWithEmail,
-  signInWithGoogleRedirect,
-} from '../../utils/firebase/firebase.utils';
 
 import './SignInForm.styles.scss';
+import { useDispatch } from 'react-redux';
+import {
+  emailSignInStart,
+  googleSignInStart,
+} from '../../store/user/user.action';
 
 const defaultFormFields = {
   email: '',
@@ -15,6 +16,11 @@ const defaultFormFields = {
 
 const SignInForm = () => {
   const [formFields, setFormFields] = useState(defaultFormFields);
+  const dispatch = useDispatch();
+
+  const signInGoogleRedirect = () => {
+    dispatch(googleSignInStart());
+  };
 
   const handleChange = (event) => {
     setFormFields({
@@ -33,7 +39,7 @@ const SignInForm = () => {
     }
 
     try {
-      await signInWithEmail(email, password);
+      dispatch(emailSignInStart(email, password));
       setFormFields(defaultFormFields);
     } catch (error) {
       switch (error.code) {
@@ -82,7 +88,7 @@ const SignInForm = () => {
           <Button
             type="button"
             buttonType={BUTTON_TYPE_CLASSES.google}
-            onClick={signInWithGoogleRedirect}
+            onClick={signInGoogleRedirect}
           >
             Google Sign In
           </Button>
