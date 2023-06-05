@@ -1,5 +1,5 @@
 // eslint-disable-next-line
-import { takeLatest, all, call, put } from 'redux-saga/effects';
+import { all, put, takeLatest } from 'redux-saga/effects';
 import {
   createUserDocumentFromAuth,
   createUserDocumentFromEmail,

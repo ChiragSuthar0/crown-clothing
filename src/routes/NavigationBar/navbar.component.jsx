@@ -3,7 +3,6 @@ import './navbar.styles';
 
 import { ReactComponent as CrownLogo } from '../../assets/crown.svg';
 import { Fragment } from 'react';
-import { signOutUser } from '../../utils/firebase/firebase.utils';
 import CartIcon from '../../components/Cart-Icon/cart-icon.component';
 import CartDropdown from '../../components/Cart-dropdown/cart-dropdown.component';
 import { Head, LogoContainer, Nav, NavbarLinks } from './navbar.styles';
