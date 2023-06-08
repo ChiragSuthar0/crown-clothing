@@ -16,7 +16,7 @@ const middleWares = [
 const composeEnhancer =
   (process.env.NODE_ENV !== 'production' &&
     window &&
-    window.__REDUX_DEVTOOLS_EXTENTION_COMPOSE__) ||
+    window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) ||
   compose;
 
 const composedEnhancers = composeEnhancer(applyMiddleware(...middleWares));
