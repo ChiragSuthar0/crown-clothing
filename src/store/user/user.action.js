@@ -1,8 +1,9 @@
-import CreateAction from '../../utils/reducers/reducer.utils';
+import CreateAction, { withMatcher } from '../../utils/reducers/reducer.utils';
 import { USER_ACTION_TYPES } from './user.types';
 
-export const checkUserSession = () =>
-  CreateAction(USER_ACTION_TYPES.CHECK_USER_SESSION);
+export const checkUserSession = withMatcher(() =>
+  CreateAction(USER_ACTION_TYPES.CHECK_USER_SESSION)
+);
 
 export const googleSignInStart = () =>
   CreateAction(USER_ACTION_TYPES.GOOGLE_SIGN_IN_START);

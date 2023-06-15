@@ -1,9 +1,8 @@
-// eslint-disable-next-line
 import { createSelector } from 'reselect';
 import { CategoriesState } from './category.reducer';
 import { CategoryMap } from './category.types';
 
-const selectCategoryReducer = (state): CategoriesState => state.category;
+const selectCategoryReducer = (state: any): CategoriesState => state.category;
 
 export const selectCategories = createSelector(
   [selectCategoryReducer],
